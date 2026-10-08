@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn Lab</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7fb;
+  color: #182033;
+}
+
+header {
+  background: white;
+  padding: 20px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e8ef;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+nav a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: #555f73;
+  font-weight: 600;
+}
+
+.hero {
+  max-width: 1100px;
+  margin: auto;
+  padding: 80px 25px 50px;
+  text-align: center;
+}
+
+.hero .small {
+  color: #4967d8;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 8vw, 78px);
+  margin: 15px 0;
+  letter-spacing: -4px;
+}
+
+.hero h1 span {
+  color: #4967d8;
+}
+
+.hero p {
+  max-width: 650px;
+  margin: auto;
+  color: #667085;
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+.subjects {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px 25px 70px;
+}
+
+.subjects h2 {
+  text-align: center;
+  font-size: 32px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e3e7ef;
+  border-radius: 22px;
+  padding: 30px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card .icon {
+  font-size: 45px;
+}
+
+.card h3 {
+  font-size: 23px;
+}
+
+.card p {
+  color: #667085;
+  line-height: 1.5;
+}
+
+.lab {
+  max-width: 1000px;
+  margin: 0 auto 80px;
+  background: white;
+  border-radius: 28px;
+  padding: 35px;
+  border: 1px solid #e3e7ef;
+}
+
+.lab-tag {
+  color: #4967d8;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.lab h2 {
+  font-size: 34px;
+  margin: 8px 0;
+}
+
+.lab-description {
+  color: #667085;
+}
+
+.equation {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 15px;
+  align-items: center;
+  margin: 35px 0 20px;
+}
+
+.side {
+  min-height: 160px;
+  border: 3px solid #e0e4ec;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.equals {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.block {
+  width: 55px;
+  height: 55px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.x {
+  background: #e5e9fb;
+  color: #394fa9;
+}
+
+.number {
+  background: #fff0df;
+  color: #9b581e;
+}
+
+.hint {
+  text-align: center;
+  color: #667085;
+  min-height: 25px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+button {
+  border: none;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #4967d8;
+  color: white;
+}
+
+button.secondary {
+  background: #eef1f7;
+  color: #182033;
+}
+
+.feedback {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 15px;
+  background: #f5f7fb;
+  text-align: center;
+  line-height: 1.5;
+}
+
+footer {
+  text-align: center;
+  padding: 40px;
+  color: #667085;
+}
+
+@media(max-width:700px) {
+  header {
+    padding: 18px 20px;
+  }
+
+  nav {
+    display: none;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .equation {
+    grid-template-columns: 1fr;
+  }
+
+  .equals {
+    display: none;
+  }
+
+  .lab {
+    margin: 20px;
+    padding: 22px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🧠 Learn Lab</div>
+
+  <nav>
+    <a href="#subjects">Explore</a>
+    <a href="#lab">Maths Lab</a>
+  </nav>
+</header>
+
+<section class="hero">
+
+  <div class="small">MATHS + SCIENCE</div>
+
+  <h1>
+    Don't just learn it.<br>
+    <span>Play with it.</span>
+  </h1>
+
+  <p>
+    Explore maths and science through experiments,
+    challenges and interactive worlds.
+  </p>
+
+</section>
+
+<section class="subjects" id="subjects">
+
+  <h2>Choose your world</h2>
+
+  <div class="cards">
+
+    <div class="card" onclick="showMessage('Maths')">
+      <div class="icon">🧮</div>
+      <h3>Maths</h3>
+      <p>Build, move and experiment with numbers, equations, shapes and patterns.</p>
+    </div>
+
+    <div class="card" onclick="showMessage('Science')">
+      <div class="icon">🔬</div>
+      <h3>Science</h3>
+      <p>Run experiments and discover what happens when you change the variables.</p>
+    </div>
+
+    <div class="card" onclick="showMessage('Challenges')">
+      <div class="icon">🚀</div>
+      <h3>Challenges</h3>
+      <p>Use what you've learned to solve puzzles, missions and real-world problems.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="lab" id="lab">
+
+  <div class="lab-tag">MATHS LAB · ALGEBRA</div>
+
+  <h2>⚖️ Balance the Equation</h2>
+
+  <p class="lab-description">
+    Your mission: make both sides equal, then discover what x is worth.
+  </p>
+
+  <div class="equation">
+
+    <div class="side" id="left">
+
+      <div class="block x">x</div>
+      <div class="block x">x</div>
+      <div class="block number">+4</div>
+
+    </div>
+
+    <div class="equals">=</div>
+
+    <div class="side" id="right">
+
+      <div class="block number">12</div>
+
+    </div>
+
+  </div>
+
+  <div class="hint" id="hint">
+    What should you remove from BOTH sides first?
+  </div>
+
+  <div class="buttons">
+
+    <button onclick="removeFour()">
+      Remove 4 from both sides
+    </button>
+
+    <button class="secondary" onclick="splitGroups()">
+      Split into 2 equal groups
+    </button>
+
+    <button class="secondary" onclick="resetLab()">
+      Reset
+    </button>
+
+  </div>
+
+  <div class="feedback" id="feedback">
+    💡 Tip: whatever you do to one side of an equation,
+    you must also do to the other side.
+  </div>
+
+</section>
+
+<footer>
+  🧠 Learn Lab · Learn by exploring
+</footer>
+
+
+<script>
+
+let stage = 0;
+
+function removeFour() {
+
+  if (stage !== 0) {
+    return;
+  }
+
+  document.getElementById("left").innerHTML = `
+    <div class="block x">x</div>
+    <div class="block x">x</div>
+  `;
+
+  document.getElementById("right").innerHTML = `
+    <div class="block number">8</div>
+  `;
+
+  document.getElementById("hint").innerText =
+    "Great! Now we have 2x = 8. What happens next?";
+
+  document.getElementById("feedback").innerText =
+    "✓ Balanced! You removed 4 from BOTH sides. The equation is now 2x = 8.";
+
+  stage = 1;
+}
+
+
+function splitGroups() {
+
+  if (stage !== 1) {
+
+    document.getElementById("feedback").innerText =
+      "Try removing 4 from both sides first.";
+
+    return;
+  }
+
+  document.getElementById("left").innerHTML = `
+    <div class="block x">x</div>
+  `;
+
+  document.getElementById("right").innerHTML = `
+    <div class="block number">4</div>
+  `;
+
+  document.getElementById("hint").innerText =
+    "🎉 You solved it! x = 4.";
+
+  document.getElementById("feedback").innerText =
+    "✓ We divided both sides into 2 equal groups. One x is worth 4.";
+
+  stage = 2;
+}
+
+
+function resetLab() {
+
+  document.getElementById("left").innerHTML = `
+    <div class="block x">x</div>
+    <div class="block x">x</div>
+    <div class="block number">+4</div>
+  `;
+
+  document.getElementById("right").innerHTML = `
+    <div class="block number">12</div>
+  `;
+
+  document.getElementById("hint").innerText =
+    "What should you remove from BOTH sides first?";
+
+  document.getElementById("feedback").innerText =
+    "💡 Tip: whatever you do to one side of an equation, you must also do to the other side.";
+
+  stage = 0;
+}
+
+
+function showMessage(subject) {
+
+  alert(
+    subject + " is coming soon! 🚀\n\n" +
+    "This is where we'll build the next interactive world."
+  );
+
+}
+
+</script>
+
+</body>
+</html>
