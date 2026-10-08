@@ -1,468 +1,593 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Learn Lab</title>
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f5f7fb;
-  color: #182033;
-}
-
-header {
-  background: white;
-  padding: 20px 7%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #e5e8ef;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: 800;
-}
-
-nav a {
-  margin-left: 25px;
-  text-decoration: none;
-  color: #555f73;
-  font-weight: 600;
-}
-
-.hero {
-  max-width: 1100px;
-  margin: auto;
-  padding: 80px 25px 50px;
-  text-align: center;
-}
-
-.hero .small {
-  color: #4967d8;
-  font-weight: 800;
-  letter-spacing: 2px;
-}
-
-.hero h1 {
-  font-size: clamp(42px, 8vw, 78px);
-  margin: 15px 0;
-  letter-spacing: -4px;
-}
-
-.hero h1 span {
-  color: #4967d8;
-}
-
-.hero p {
-  max-width: 650px;
-  margin: auto;
-  color: #667085;
-  font-size: 19px;
-  line-height: 1.6;
-}
-
-.subjects {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px 25px 70px;
-}
-
-.subjects h2 {
-  text-align: center;
-  font-size: 32px;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.card {
-  background: white;
-  border: 1px solid #e3e7ef;
-  border-radius: 22px;
-  padding: 30px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card .icon {
-  font-size: 45px;
-}
-
-.card h3 {
-  font-size: 23px;
-}
-
-.card p {
-  color: #667085;
-  line-height: 1.5;
-}
-
-.lab {
-  max-width: 1000px;
-  margin: 0 auto 80px;
-  background: white;
-  border-radius: 28px;
-  padding: 35px;
-  border: 1px solid #e3e7ef;
-}
-
-.lab-tag {
-  color: #4967d8;
-  font-weight: 800;
-  font-size: 13px;
-  letter-spacing: 1px;
-}
-
-.lab h2 {
-  font-size: 34px;
-  margin: 8px 0;
-}
-
-.lab-description {
-  color: #667085;
-}
-
-.equation {
-  display: grid;
-  grid-template-columns: 1fr 60px 1fr;
-  gap: 15px;
-  align-items: center;
-  margin: 35px 0 20px;
-}
-
-.side {
-  min-height: 160px;
-  border: 3px solid #e0e4ec;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  padding: 20px;
-}
-
-.equals {
-  text-align: center;
-  font-size: 40px;
-  font-weight: bold;
-}
-
-.block {
-  width: 55px;
-  height: 55px;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.x {
-  background: #e5e9fb;
-  color: #394fa9;
-}
-
-.number {
-  background: #fff0df;
-  color: #9b581e;
-}
-
-.hint {
-  text-align: center;
-  color: #667085;
-  min-height: 25px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-button {
-  border: none;
-  padding: 14px 20px;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  background: #4967d8;
-  color: white;
-}
-
-button.secondary {
-  background: #eef1f7;
-  color: #182033;
-}
-
-.feedback {
-  margin-top: 20px;
-  padding: 18px;
-  border-radius: 15px;
-  background: #f5f7fb;
-  text-align: center;
-  line-height: 1.5;
-}
-
-footer {
-  text-align: center;
-  padding: 40px;
-  color: #667085;
-}
-
-@media(max-width:700px) {
-  header {
-    padding: 18px 20px;
-  }
-
-  nav {
-    display: none;
-  }
-
-  .cards {
-    grid-template-columns: 1fr;
-  }
-
-  .equation {
-    grid-template-columns: 1fr;
-  }
-
-  .equals {
-    display: none;
-  }
-
-  .lab {
-    margin: 20px;
-    padding: 22px;
-  }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Equations Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom range slider styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: currentColor;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #e2e8f0;
+            border-radius: 2px;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        /* Tab transition */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
+<body class="bg-slate-50 text-slate-800 p-4 md:p-8 font-sans min-h-screen">
 
-<body>
+    <div class="max-w-6xl mx-auto space-y-6">
+        
+        <!-- Header -->
+        <header class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+            <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+                Linear Equations Explorer
+            </h1>
+            <p class="text-slate-500 mt-2 text-lg">
+                Discover the geometry and algebra behind <em>y = mx + c</em> and simultaneous systems.
+            </p>
+        </header>
 
-<header>
-  <div class="logo">🧠 Learn Lab</div>
+        <!-- Navigation Tabs -->
+        <div class="flex space-x-2 bg-slate-200/50 p-1.5 rounded-xl overflow-x-auto" id="tabs">
+            <button onclick="setTab('explore')" id="tab-explore" class="tab-btn flex items-center space-x-2 px-5 py-3 rounded-lg font-medium transition-all whitespace-nowrap bg-white text-blue-700 shadow-sm border border-slate-200/50">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                <span>1. Explore a Line</span>
+            </button>
+            <button onclick="setTab('graphical')" id="tab-graphical" class="tab-btn flex items-center space-x-2 px-5 py-3 rounded-lg font-medium transition-all whitespace-nowrap text-slate-600 hover:bg-slate-200 hover:text-slate-900">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/></svg>
+                <span>2. Graphical Method</span>
+            </button>
+            <button onclick="setTab('algebraic')" id="tab-algebraic" class="tab-btn flex items-center space-x-2 px-5 py-3 rounded-lg font-medium transition-all whitespace-nowrap text-slate-600 hover:bg-slate-200 hover:text-slate-900">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+                <span>3. Algebraic Methods</span>
+            </button>
+        </div>
 
-  <nav>
-    <a href="#subjects">Explore</a>
-    <a href="#lab">Maths Lab</a>
-  </nav>
-</header>
+        <!-- Content Area -->
+        <main class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Controls Column -->
+            <div class="lg:col-span-4 space-y-6">
+                
+                <!-- Equation 1 Panel -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-blue-100 border-t-4 border-t-blue-500">
+                    <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                        <span class="w-3 h-3 rounded-full bg-blue-500 mr-2"></span>
+                        Equation 1
+                    </h2>
+                    <div id="eq1-display" class="bg-slate-50 rounded-xl p-4 mb-5 text-center font-mono text-xl text-blue-700 border border-blue-100">
+                        <!-- Filled by JS -->
+                    </div>
+                    
+                    <!-- Sliders -->
+                    <div class="flex items-center space-x-3 my-2 text-blue-600">
+                        <span class="font-bold w-28 text-sm whitespace-nowrap">Slope (m)</span>
+                        <input type="range" id="eq1-m" min="-10" max="10" value="2" class="w-full h-2" oninput="updateState()">
+                        <span id="eq1-m-val" class="w-8 text-right font-mono text-slate-700 bg-slate-100 px-2 py-1 rounded">2</span>
+                    </div>
+                    <div class="flex items-center space-x-3 my-2 text-blue-600">
+                        <span class="font-bold w-28 text-sm whitespace-nowrap">y-intercept (c)</span>
+                        <input type="range" id="eq1-c" min="-20" max="20" value="1" class="w-full h-2" oninput="updateState()">
+                        <span id="eq1-c-val" class="w-8 text-right font-mono text-slate-700 bg-slate-100 px-2 py-1 rounded">1</span>
+                    </div>
+                </div>
 
-<section class="hero">
+                <!-- Equation 2 Panel -->
+                <div id="panel-eq2" class="bg-white p-6 rounded-2xl shadow-sm border border-red-100 border-t-4 border-t-red-500 hidden">
+                    <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                        <span class="w-3 h-3 rounded-full bg-red-500 mr-2"></span>
+                        Equation 2
+                    </h2>
+                    <div id="eq2-display" class="bg-slate-50 rounded-xl p-4 mb-5 text-center font-mono text-xl text-red-700 border border-red-100">
+                        <!-- Filled by JS -->
+                    </div>
+                    
+                    <div class="flex items-center space-x-3 my-2 text-red-600">
+                        <span class="font-bold w-28 text-sm whitespace-nowrap">Slope (m)</span>
+                        <input type="range" id="eq2-m" min="-10" max="10" value="-1" class="w-full h-2" oninput="updateState()">
+                        <span id="eq2-m-val" class="w-8 text-right font-mono text-slate-700 bg-slate-100 px-2 py-1 rounded">-1</span>
+                    </div>
+                    <div class="flex items-center space-x-3 my-2 text-red-600">
+                        <span class="font-bold w-28 text-sm whitespace-nowrap">y-intercept (c)</span>
+                        <input type="range" id="eq2-c" min="-20" max="20" value="4" class="w-full h-2" oninput="updateState()">
+                        <span id="eq2-c-val" class="w-8 text-right font-mono text-slate-700 bg-slate-100 px-2 py-1 rounded">4</span>
+                    </div>
+                </div>
 
-  <div class="small">MATHS + SCIENCE</div>
+                <!-- Table of Values Panel (Explore Tab) -->
+                <div id="table-panel" class="bg-white p-5 rounded-2xl shadow-sm border border-indigo-100 border-t-4 border-t-indigo-400">
+                    <h2 class="text-sm font-bold text-slate-800 mb-3 flex items-center">
+                        <svg class="mr-2 text-indigo-500" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                        Table of Values
+                    </h2>
+                    <div class="rounded overflow-hidden border border-slate-200">
+                        <table class="w-full border-collapse text-center">
+                            <tr class="bg-slate-100 border-b border-slate-200">
+                                <th class="p-2 border-r border-slate-200 text-slate-600 w-12 text-sm">x</th>
+                                <td class="p-2 border-r border-slate-200 font-mono">-1</td>
+                                <td class="p-2 border-r border-slate-200 font-mono">0</td>
+                                <td class="p-2 font-mono">1</td>
+                            </tr>
+                            <tr>
+                                <th class="p-2 border-r border-slate-200 bg-slate-50 text-slate-600 text-sm">y</th>
+                                <td id="t-y1" class="p-2 border-r border-slate-200 font-mono text-blue-600 font-bold"></td>
+                                <td id="t-y2" class="p-2 border-r border-slate-200 font-mono text-blue-600 font-bold"></td>
+                                <td id="t-y3" class="p-2 font-mono text-blue-600 font-bold"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
 
-  <h1>
-    Don't just learn it.<br>
-    <span>Play with it.</span>
-  </h1>
+                <!-- Guiding Questions -->
+                <div class="bg-amber-50 p-5 rounded-2xl border border-amber-200">
+                    <div class="flex items-start space-x-3">
+                        <svg class="text-amber-600 mt-1 flex-shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        <div>
+                            <h3 class="font-bold text-amber-900 mb-1">Guiding Questions</h3>
+                            <div id="guiding-questions" class="text-sm text-amber-800 space-y-2 list-disc pl-4">
+                                <!-- Filled by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <p>
-    Explore maths and science through experiments,
-    challenges and interactive worlds.
-  </p>
+            <!-- Visualization Column -->
+            <div class="lg:col-span-8 flex flex-col space-y-6">
+                
+                <!-- Graphical View -->
+                <div id="view-graphical" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-full flex-col tab-content active">
+                    <h2 id="graph-title" class="text-xl font-bold mb-4 flex items-center text-slate-800">
+                        <svg class="mr-2 text-slate-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 8 22 12 18 16"/><polyline points="6 8 2 12 6 16"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+                        Graphing a Single Line
+                    </h2>
+                    
+                    <div class="flex-grow flex items-center justify-center bg-slate-50/50 rounded-xl border border-slate-100 p-4">
+                        <div class="relative border-2 border-slate-200 rounded-xl overflow-hidden bg-white shadow-inner flex justify-center items-center p-4">
+                            <svg id="cartesian-plane" width="400" height="400" class="bg-slate-50 rounded" viewBox="0 0 400 400">
+                                <!-- Grid generated by JS -->
+                                <g id="grid-lines"></g>
+                                
+                                <!-- Axis Labels -->
+                                <text x="385" y="215" class="text-xs font-bold fill-slate-500">x</text>
+                                <text x="185" y="15" class="text-xs font-bold fill-slate-500">y</text>
+                        
+                                <!-- Lines -->
+                                <line id="svg-line1" stroke="#2563eb" stroke-width="3" opacity="0.8" />
+                                <line id="svg-line2" stroke="#dc2626" stroke-width="3" opacity="0.8" stroke-dasharray="5,5" class="hidden" />
+                        
+                                <!-- Intersection Point -->
+                                <circle id="svg-intersection" r="6" fill="#16a34a" stroke="white" stroke-width="2" class="hidden" />
+                                
+                                <!-- Table Points for Explore Mode -->
+                                <circle id="pt1" r="5" fill="#1d4ed8" stroke="white" stroke-width="2" class="hidden" />
+                                <circle id="pt2" r="5" fill="#1d4ed8" stroke="white" stroke-width="2" class="hidden" />
+                                <circle id="pt3" r="5" fill="#1d4ed8" stroke="white" stroke-width="2" class="hidden" />
+                            </svg>
+                        
+                            <!-- Floating coordinates badge -->
+                            <div id="badge-intersection" class="hidden absolute top-4 right-4 bg-white/90 px-3 py-2 rounded-lg shadow-md border border-slate-200 text-sm font-medium">
+                                Intersection: <span id="badge-text" class="text-green-600 font-mono"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Result Summary for Graphical Mode -->
+                    <div id="graphical-summary" class="hidden mt-6 p-4 rounded-xl text-center border">
+                        <h3 id="summary-title" class="font-bold text-lg mb-1"></h3>
+                        <p id="summary-desc" class="text-sm"></p>
+                    </div>
+                </div>
 
-</section>
+                <!-- Algebraic View -->
+                <div id="view-algebraic" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-full flex-col tab-content">
+                    <h2 class="text-xl font-bold mb-6 flex items-center text-slate-800">
+                        <svg class="mr-2 text-slate-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        Step-by-Step Algebra
+                    </h2>
 
-<section class="subjects" id="subjects">
-
-  <h2>Choose your world</h2>
-
-  <div class="cards">
-
-    <div class="card" onclick="showMessage('Maths')">
-      <div class="icon">🧮</div>
-      <h3>Maths</h3>
-      <p>Build, move and experiment with numbers, equations, shapes and patterns.</p>
+                    <!-- Container for dynamic algebraic steps -->
+                    <div id="algebra-content" class="flex-grow flex flex-col h-full"></div>
+                </div>
+                
+            </div>
+        </main>
     </div>
 
-    <div class="card" onclick="showMessage('Science')">
-      <div class="icon">🔬</div>
-      <h3>Science</h3>
-      <p>Run experiments and discover what happens when you change the variables.</p>
-    </div>
+    <!-- Application Logic -->
+    <script>
+        // --- State ---
+        let state = {
+            tab: 'explore',
+            eq1: { m: 2, c: 1 },
+            eq2: { m: -1, c: 4 },
+            solution: null
+        };
 
-    <div class="card" onclick="showMessage('Challenges')">
-      <div class="icon">🚀</div>
-      <h3>Challenges</h3>
-      <p>Use what you've learned to solve puzzles, missions and real-world problems.</p>
-    </div>
+        const size = 400;
+        const scale = size / 20; // -10 to 10 range
+        const center = size / 2;
 
-  </div>
+        // --- Initialization ---
+        function init() {
+            drawGrid();
+            updateState(); // Calculate and render
+        }
 
-</section>
+        // --- Math & Formatting Utilities ---
+        
+        // Formats just the right hand side: mx + c
+        function formatExpression(m, c) {
+            if (m === 0 && c === 0) return '0';
+            
+            let termX = '';
+            if (m === 1) termX = 'x';
+            else if (m === -1) termX = '-x';
+            else if (m !== 0) termX = `${m}x`;
+            
+            if (m === 0) return `${c}`;
+            if (c === 0) return termX;
+            if (c > 0) return `${termX} + ${c}`;
+            return `${termX} - ${Math.abs(c)}`;
+        }
 
-<section class="lab" id="lab">
+        function formatEquation(m, c) {
+            return `y = ${formatExpression(m, c)}`;
+        }
 
-  <div class="lab-tag">MATHS LAB · ALGEBRA</div>
+        function solveSystem(eq1, eq2) {
+            // y = m1*x + c1
+            // y = m2*x + c2
+            if (eq1.m === eq2.m) {
+                if (eq1.c === eq2.c) return { type: 'infinite' };
+                return { type: 'none' };
+            }
+            const x = (eq2.c - eq1.c) / (eq1.m - eq2.m);
+            const y = eq1.m * x + eq1.c;
+            return { type: 'unique', x, y };
+        }
 
-  <h2>⚖️ Balance the Equation</h2>
+        const round = (num) => Math.round(num * 100) / 100;
 
-  <p class="lab-description">
-    Your mission: make both sides equal, then discover what x is worth.
-  </p>
+        function getLinePoints(m, c) {
+            const p1 = { x: -10, y: m * -10 + c };
+            const p2 = { x: 10, y: m * 10 + c };
+            return {
+                x1: center + p1.x * scale,
+                y1: center - p1.y * scale,
+                x2: center + p2.x * scale,
+                y2: center - p2.y * scale,
+            };
+        }
 
-  <div class="equation">
+        // --- View Updates ---
 
-    <div class="side" id="left">
+        function drawGrid() {
+            const gridGroup = document.getElementById('grid-lines');
+            let gridHTML = '';
+            let axesHTML = '';
+            let labelsHTML = '';
+            
+            for (let i = 0; i <= 20; i++) {
+                if (i === 10) {
+                    axesHTML += `<line x1="${i * scale}" y1="0" x2="${i * scale}" y2="${size}" stroke="#000000" stroke-width="2" />`;
+                    axesHTML += `<line x1="0" y1="${i * scale}" x2="${size}" y2="${i * scale}" stroke="#000000" stroke-width="2" />`;
+                } else {
+                    gridHTML += `<line x1="${i * scale}" y1="0" x2="${i * scale}" y2="${size}" stroke="#e2e8f0" stroke-width="1" />`;
+                    gridHTML += `<line x1="0" y1="${i * scale}" x2="${size}" y2="${i * scale}" stroke="#e2e8f0" stroke-width="1" />`;
+                    
+                    // Add numeric labels, using even numbers to prevent overcrowding
+                    if (i % 2 === 0) {
+                        let xVal = i - 10;
+                        let yVal = 10 - i;
+                        // Bottom of X axis
+                        labelsHTML += `<text x="${i * scale}" y="${size/2 + 14}" text-anchor="middle" font-size="10" fill="#64748b">${xVal}</text>`;
+                        // Right side of Y axis
+                        labelsHTML += `<text x="${size/2 + 6}" y="${i * scale + 4}" font-size="10" fill="#64748b">${yVal}</text>`;
+                    }
+                }
+            }
+            // Add the origin 0 label
+            labelsHTML += `<text x="${size/2 + 6}" y="${size/2 + 14}" font-size="10" fill="#64748b">0</text>`;
+            
+            gridGroup.innerHTML = gridHTML + axesHTML + labelsHTML;
+        }
 
-      <div class="block x">x</div>
-      <div class="block x">x</div>
-      <div class="block number">+4</div>
+        function setTab(tabId) {
+            state.tab = tabId;
+            
+            // Update Tab UI
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn flex items-center space-x-2 px-5 py-3 rounded-lg font-medium transition-all whitespace-nowrap text-slate-600 hover:bg-slate-200 hover:text-slate-900";
+            });
+            document.getElementById(`tab-${tabId}`).className = "tab-btn flex items-center space-x-2 px-5 py-3 rounded-lg font-medium transition-all whitespace-nowrap bg-white text-blue-700 shadow-sm border border-slate-200/50";
 
-    </div>
+            // Update Content Views
+            document.getElementById('view-graphical').classList.remove('active');
+            document.getElementById('view-algebraic').classList.remove('active');
+            
+            if (tabId === 'explore' || tabId === 'graphical') {
+                document.getElementById('view-graphical').classList.add('active');
+            } else {
+                document.getElementById('view-algebraic').classList.add('active');
+            }
 
-    <div class="equals">=</div>
+            render();
+        }
 
-    <div class="side" id="right">
+        function updateState() {
+            state.eq1.m = parseInt(document.getElementById('eq1-m').value);
+            state.eq1.c = parseInt(document.getElementById('eq1-c').value);
+            
+            state.eq2.m = parseInt(document.getElementById('eq2-m').value);
+            state.eq2.c = parseInt(document.getElementById('eq2-c').value);
 
-      <div class="block number">12</div>
+            state.solution = solveSystem(state.eq1, state.eq2);
+            render();
+        }
 
-    </div>
+        function render() {
+            const { tab, eq1, eq2, solution } = state;
 
-  </div>
+            // Update Panel Visibilities
+            document.getElementById('panel-eq2').style.display = tab !== 'explore' ? 'block' : 'none';
+            document.getElementById('graph-title').innerHTML = tab === 'explore' 
+                ? '<svg class="mr-2 text-slate-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 8 22 12 18 16"/><polyline points="6 8 2 12 6 16"/><line x1="2" y1="12" x2="22" y2="12"/></svg> Graphing a Single Line' 
+                : '<svg class="mr-2 text-slate-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 8 22 12 18 16"/><polyline points="6 8 2 12 6 16"/><line x1="2" y1="12" x2="22" y2="12"/></svg> Finding the Intersection';
 
-  <div class="hint" id="hint">
-    What should you remove from BOTH sides first?
-  </div>
+            // Update text displays
+            document.getElementById('eq1-display').textContent = formatEquation(eq1.m, eq1.c);
+            document.getElementById('eq1-m-val').textContent = eq1.m;
+            document.getElementById('eq1-c-val').textContent = eq1.c;
 
-  <div class="buttons">
+            document.getElementById('eq2-display').textContent = formatEquation(eq2.m, eq2.c);
+            document.getElementById('eq2-m-val').textContent = eq2.m;
+            document.getElementById('eq2-c-val').textContent = eq2.c;
 
-    <button onclick="removeFour()">
-      Remove 4 from both sides
-    </button>
+            // Update Guiding Questions
+            let questionsHTML = '';
+            if (tab === 'explore') {
+                questionsHTML = `
+                    <li>What happens to the line when you increase <span class="font-mono bg-amber-100 px-1 rounded">m</span> (the slope)?</li>
+                    <li>What happens to the angle when <span class="font-mono bg-amber-100 px-1 rounded">m</span> is negative?</li>
+                    <li>How does changing <span class="font-mono bg-amber-100 px-1 rounded">c</span> (the y-intercept) affect where the line crosses the middle axis?</li>
+                `;
+            } else if (tab === 'graphical') {
+                questionsHTML = `
+                    <li>Can you make the blue and red lines perfectly parallel? What must be true about their slopes (<span class="font-mono bg-amber-100 px-1 rounded">m</span>)?</li>
+                    <li>What values make the two lines overlap completely (Infinite solutions)?</li>
+                `;
+            } else {
+                questionsHTML = `
+                    <li>Because both equations are already isolated for <span class="font-mono bg-amber-100 px-1 rounded">y</span>, the Substitution Method becomes very fast!</li>
+                    <li>Compare Substitution and Elimination. Notice how they both result in solving the exact same expression for <span class="font-mono bg-amber-100 px-1 rounded">x</span>!</li>
+                `;
+            }
+            document.getElementById('guiding-questions').innerHTML = `<ul>${questionsHTML}</ul>`;
 
-    <button class="secondary" onclick="splitGroups()">
-      Split into 2 equal groups
-    </button>
+            // Update Table of Values (Explore Tab only)
+            const tablePanel = document.getElementById('table-panel');
+            const pt1 = document.getElementById('pt1');
+            const pt2 = document.getElementById('pt2');
+            const pt3 = document.getElementById('pt3');
 
-    <button class="secondary" onclick="resetLab()">
-      Reset
-    </button>
+            if (tab === 'explore') {
+                tablePanel.style.display = 'block';
+                
+                // Calculate and display table y values
+                const y1 = eq1.m * (-1) + eq1.c;
+                const y2 = eq1.m * (0) + eq1.c;
+                const y3 = eq1.m * (1) + eq1.c;
 
-  </div>
+                document.getElementById('t-y1').textContent = y1;
+                document.getElementById('t-y2').textContent = y2;
+                document.getElementById('t-y3').textContent = y3;
 
-  <div class="feedback" id="feedback">
-    💡 Tip: whatever you do to one side of an equation,
-    you must also do to the other side.
-  </div>
+                // Move SVG plot points
+                pt1.setAttribute('cx', center + (-1) * scale);
+                pt1.setAttribute('cy', center - y1 * scale);
+                
+                pt2.setAttribute('cx', center + (0) * scale);
+                pt2.setAttribute('cy', center - y2 * scale);
+                
+                pt3.setAttribute('cx', center + (1) * scale);
+                pt3.setAttribute('cy', center - y3 * scale);
 
-</section>
+                // Show the points
+                pt1.classList.remove('hidden');
+                pt2.classList.remove('hidden');
+                pt3.classList.remove('hidden');
+            } else {
+                tablePanel.style.display = 'none';
+                pt1.classList.add('hidden');
+                pt2.classList.add('hidden');
+                pt3.classList.add('hidden');
+            }
 
-<footer>
-  🧠 Learn Lab · Learn by exploring
-</footer>
+            // Update Graphical View
+            if (tab === 'explore' || tab === 'graphical') {
+                const pts1 = getLinePoints(eq1.m, eq1.c);
+                const line1 = document.getElementById('svg-line1');
+                line1.setAttribute('x1', pts1.x1); line1.setAttribute('y1', pts1.y1);
+                line1.setAttribute('x2', pts1.x2); line1.setAttribute('y2', pts1.y2);
+                line1.classList.remove('hidden');
 
+                const line2 = document.getElementById('svg-line2');
+                const intersect = document.getElementById('svg-intersection');
+                const badge = document.getElementById('badge-intersection');
+                const summary = document.getElementById('graphical-summary');
 
-<script>
+                if (tab === 'graphical') {
+                    const pts2 = getLinePoints(eq2.m, eq2.c);
+                    line2.setAttribute('x1', pts2.x1); line2.setAttribute('y1', pts2.y1);
+                    line2.setAttribute('x2', pts2.x2); line2.setAttribute('y2', pts2.y2);
+                    line2.classList.remove('hidden');
 
-let stage = 0;
+                    if (solution.type === 'unique') {
+                        intersect.setAttribute('cx', center + solution.x * scale);
+                        intersect.setAttribute('cy', center - solution.y * scale);
+                        intersect.classList.remove('hidden');
+                        badge.classList.remove('hidden');
+                        document.getElementById('badge-text').textContent = `(${round(solution.x)}, ${round(solution.y)})`;
 
-function removeFour() {
+                        summary.className = "mt-6 p-4 rounded-xl text-center border bg-green-50 border-green-200 text-green-800 block";
+                        document.getElementById('summary-title').textContent = "Unique Solution Found";
+                        document.getElementById('summary-desc').textContent = `The lines intersect at exactly one point: x = ${round(solution.x)}, y = ${round(solution.y)}`;
+                    } else {
+                        intersect.classList.add('hidden');
+                        badge.classList.add('hidden');
+                        
+                        if (solution.type === 'none') {
+                            summary.className = "mt-6 p-4 rounded-xl text-center border bg-red-50 border-red-200 text-red-800 block";
+                            document.getElementById('summary-title').textContent = "No Solution";
+                            document.getElementById('summary-desc').textContent = "The slopes are the same but intercepts are different. They are parallel and never intersect.";
+                        } else if (solution.type === 'infinite') {
+                            summary.className = "mt-6 p-4 rounded-xl text-center border bg-purple-50 border-purple-200 text-purple-800 block";
+                            document.getElementById('summary-title').textContent = "Infinite Solutions";
+                            document.getElementById('summary-desc').textContent = "The equations share the exact same slope and intercept. Every point on the line is a solution.";
+                        }
+                    }
+                } else {
+                    line2.classList.add('hidden');
+                    intersect.classList.add('hidden');
+                    badge.classList.add('hidden');
+                    summary.classList.remove('block');
+                    summary.classList.add('hidden');
+                }
+            }
 
-  if (stage !== 0) {
-    return;
-  }
+            // Update Algebraic View
+            if (tab === 'algebraic') {
+                const algContent = document.getElementById('algebra-content');
+                if (solution.type !== 'unique') {
+                    algContent.innerHTML = `
+                        <div class="flex-grow flex items-center justify-center p-8 text-center bg-slate-50 rounded-xl border border-dashed border-slate-300 h-full">
+                            <div>
+                                <svg class="mx-auto text-slate-300 mb-4" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+                                <h3 class="text-xl font-bold text-slate-600">Special Case Detected</h3>
+                                <p class="text-slate-500 mt-2">
+                                    ${solution.type === 'none' ? 'These lines are parallel (No Solution).' : 'These are the same line (Infinite Solutions).'} <br/>
+                                    Try changing the sliders to create an intersection!
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    const mDiff = eq1.m - eq2.m;
+                    const cDiff = eq2.c - eq1.c;
+                    const cDiffEq = eq1.c - eq2.c;
 
-  document.getElementById("left").innerHTML = `
-    <div class="block x">x</div>
-    <div class="block x">x</div>
-  `;
+                    algContent.innerHTML = `
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow">
+                            <!-- Substitution -->
+                            <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm">
+                                <h3 class="font-bold text-lg text-indigo-700 mb-4 border-b border-indigo-100 pb-2">Method 1: Substitution</h3>
+                                <div class="space-y-4 text-sm font-mono text-slate-700">
+                                    <div>
+                                        <p class="text-xs text-slate-500 font-sans font-semibold mb-1">Step 1: Set equations equal to each other</p>
+                                        <p class="bg-white p-2 border border-slate-200 rounded">
+                                            Since both equal y:<br/>
+                                            <span class="text-indigo-600">${formatExpression(eq1.m, eq1.c)}</span> = <span class="text-indigo-600">${formatExpression(eq2.m, eq2.c)}</span>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-500 font-sans font-semibold mb-1">Step 2: Group x terms & constants</p>
+                                        <p class="bg-white p-2 border border-slate-200 rounded">
+                                            (${eq1.m}x) - (${eq2.m}x) = (${eq2.c}) - (${eq1.c})<br/>
+                                            ${mDiff}x = ${cDiff}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-500 font-sans font-semibold mb-1">Step 3: Solve for x</p>
+                                        <p class="bg-white p-2 border border-slate-200 rounded bg-green-50 text-green-800 font-bold">
+                                            x = ${cDiff} / ${mDiff}<br/>
+                                            x = ${round(solution.x)}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-500 font-sans font-semibold mb-1">Step 4: Substitute x back into Eq 1</p>
+                                        <p class="bg-white p-2 border border-slate-200 rounded bg-blue-50 text-blue-800 font-bold">
+                                            y = ${eq1.m}(${round(solution.x)}) ${eq1.c >= 0 ? '+' : '-'} ${Math.abs(eq1.c)}<br/>
+                                            y = ${round(solution.y)}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
 
-  document.getElementById("right").innerHTML = `
-    <div class="block number">8</div>
-  `;
+                            <!-- Elimination -->
+                            <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-sm">
+                                <h3 class="font-bold text-lg text-teal-700 mb-4 border-b border-teal-100 pb-2">Method 2: Elimination</h3>
+                                <div class="space-y-4 text-sm font-mono text-slate-700">
+                                    <div>
+                                        <p class="text-xs text-slate-500 font-sans font-semibold mb-1">Step 1: Subtract Eq 2 from Eq 1</p>
+                                        <p class="bg-white p-2 border border-slate-200 rounded">
+                                            (y) - (y) = (${formatExpression(eq1.m, eq1.c)}) - (${formatExpression(eq2.m, eq2.c)})<br/>
+                                            0 = ${mDiff}x ${cDiffEq >= 0 ? '+' : '-'} ${Math.abs(cDiffEq)}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-500 font-sans font-semibold mb-1">Step 2: Isolate x</p>
+                                        <p class="bg-white p-2 border border-slate-200 rounded">
+                                            ${-cDiffEq < 0 ? '-' : ''}${Math.abs(cDiffEq)} = ${mDiff}x<br/>
+                                            ${mDiff}x = ${-cDiffEq}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-500 font-sans font-semibold mb-1">Step 3: Solve for x</p>
+                                        <p class="bg-white p-2 border border-slate-200 rounded bg-green-50 text-green-800 font-bold">
+                                            x = ${-cDiffEq} / ${mDiff}<br/>
+                                            x = ${round(solution.x)}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-500 font-sans font-semibold mb-1">Step 4: Substitute x into Eq 2</p>
+                                        <p class="bg-white p-2 border border-slate-200 rounded bg-blue-50 text-blue-800 font-bold">
+                                            y = ${eq2.m}(${round(solution.x)}) ${eq2.c >= 0 ? '+' : '-'} ${Math.abs(eq2.c)}<br/>
+                                            y = ${round(solution.y)}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+        }
 
-  document.getElementById("hint").innerText =
-    "Great! Now we have 2x = 8. What happens next?";
-
-  document.getElementById("feedback").innerText =
-    "✓ Balanced! You removed 4 from BOTH sides. The equation is now 2x = 8.";
-
-  stage = 1;
-}
-
-
-function splitGroups() {
-
-  if (stage !== 1) {
-
-    document.getElementById("feedback").innerText =
-      "Try removing 4 from both sides first.";
-
-    return;
-  }
-
-  document.getElementById("left").innerHTML = `
-    <div class="block x">x</div>
-  `;
-
-  document.getElementById("right").innerHTML = `
-    <div class="block number">4</div>
-  `;
-
-  document.getElementById("hint").innerText =
-    "🎉 You solved it! x = 4.";
-
-  document.getElementById("feedback").innerText =
-    "✓ We divided both sides into 2 equal groups. One x is worth 4.";
-
-  stage = 2;
-}
-
-
-function resetLab() {
-
-  document.getElementById("left").innerHTML = `
-    <div class="block x">x</div>
-    <div class="block x">x</div>
-    <div class="block number">+4</div>
-  `;
-
-  document.getElementById("right").innerHTML = `
-    <div class="block number">12</div>
-  `;
-
-  document.getElementById("hint").innerText =
-    "What should you remove from BOTH sides first?";
-
-  document.getElementById("feedback").innerText =
-    "💡 Tip: whatever you do to one side of an equation, you must also do to the other side.";
-
-  stage = 0;
-}
-
-
-function showMessage(subject) {
-
-  alert(
-    subject + " is coming soon! 🚀\n\n" +
-    "This is where we'll build the next interactive world."
-  );
-
-}
-
-</script>
-
+        // Start the app
+        window.onload = init;
+    </script>
 </body>
 </html>
